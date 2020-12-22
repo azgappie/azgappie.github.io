@@ -1,4 +1,4 @@
-let socket = new WebSocket("wss://172.20.10.2:9898");
+let socket = new WebSocket("wss://89.205.137.52:9898");
 
 // message received - show the message in div#messages
 socket.onlead = function (event) {
