@@ -1,18 +1,18 @@
-let socket = new WebSocket("wss://javascript.info/article/websocket/chat/ws");
+let socket = new WebSocket("wss://172.20.10.2:9898");
 
 // send message from the form
 document.forms.publish.onsubmit = function () {
-    let outgoingMessage = this.message.value;
+    let outgoingLead = this.lead.value;
 
-    socket.send(outgoingMessage);
+    socket.send(outgoingLead);
     return false;
 };
 
 // message received - show the message in div#messages
-socket.onmessage = function (event) {
-    let message = event.data;
+socket.onlead = function (event) {
+    let lead = event.data;
 
-    let messageElem = document.createElement('div');
-    messageElem.textContent = message;
-    document.getElementById('messages').prepend(messageElem);
+    let leadElem = document.createElement('div');
+    leadElem.textContent = lead;
+    document.getElementById('leads').prepend(leadElem);
 }

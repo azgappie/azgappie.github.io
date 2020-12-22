@@ -1,22 +1,16 @@
-const ws = new require('ws');
-const wss = new ws.Server({ noServer: true });
-
-const clients = new Set();
-
-http.createServer((req, res) => {
-    wss.handleUpgrade(req, req.socket, Buffer.alloc(0), onSocketConnect);
+// Node.js socket server script
+const net = require('net');
+// Create a server object
+const server = net.createServer((socket) => {
+    socket.on('data', (data) => {
+        console.log(data.toString());
+    });
+    socket.write('SERVER: Hello! This is server speaking.<br>');
+    socket.end('SERVER: Closing connection now.<br>');
+}).on('error', (err) => {
+    console.error(err);
 });
-
-function onSocketConnect(ws) {
-    clients.add(ws);
-
-    ws.on('lead', function (lead) {
-        for (let client of clients) {
-            client.send(lead);
-        }
-    });
-
-    ws.on('close', function () {
-        clients.delete(ws);
-    });
-}
+// Open server on port 9898
+server.listen(9898, () => {
+    console.log('opened server on', server.address().port);
+});
